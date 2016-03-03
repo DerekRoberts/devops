@@ -42,6 +42,7 @@ apt-get install -y \
   curl \
   git \
   lynx \
+  nmap \
   ntpdate
 apt-get autoremove -y
 
