@@ -40,7 +40,6 @@ apt-get upgrade -y
 apt-get install -y \
   build-essential \
   curl \
-  git \
   lynx \
   nmap \
   ntpdate
