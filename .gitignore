@@ -10,7 +10,6 @@
 *.rar
 .vagrant/
 .directory
-./*/
 
 ########################
 ### GitHub Suggested ###
