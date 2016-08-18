@@ -17,7 +17,7 @@ sudo apt-get install -y \
 sudo modprobe aufs
 wget -qO- https://get.docker.com/ | sh
 sudo curl -o /usr/local/bin/docker-compose -L \
-		https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m`
+		https://github.com/docker/compose/releases/download/1.8.0/docker-compose-`uname -s`-`uname -m`
 sudo chmod +x /usr/local/bin/docker-compose
 
 
