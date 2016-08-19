@@ -58,6 +58,9 @@ apt-get install -y --no-install-recommends \
   ntpdate \
   virtualbox-guest-utils
 apt-get autoremove -y
+#
+# (note: vb utils temp fix for Vagrant/UbuCloud16.04 sync folder bug)
+# (https://bugs.launchpad.net/cloud-images/+bug/1565985)
 
 
 # NodeJS
