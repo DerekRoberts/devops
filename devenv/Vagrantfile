@@ -12,7 +12,11 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/trusty64"
+  # config.vm.box = "ubuntu/xenial64"
+  config.vm.box = "https://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-amd64-vagrant.box"
+
+  # Ubuntu xenial64 bug, not synching /vagrant
+  config.vm.synced_folder "", "/vagrant"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -23,7 +27,7 @@ Vagrant.configure(2) do |config|
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
   # config.vm.network "forwarded_port", guest: 80, host: 8080
-  [2774, 3001, 3002, 27017].each do |x|
+  [2774, 3001, 3002].each do |x|
     config.vm.network "forwarded_port", guest: x, host: x
   end
 
@@ -85,7 +89,7 @@ Vagrant.configure(2) do |config|
   # Set session as not interactive, suppressing TTY (session env) errors
   # (may interfere with vagrant-exec plugin, which we're not using)
   #
-  #config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+  config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
 
  # THE END!
 end
