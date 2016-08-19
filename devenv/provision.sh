@@ -5,7 +5,20 @@
 set -e -o nounset
 
 
-# Vagrant SSH starts in the Vagrant (synchronized) folder
+# Bug fix - ubuntu-xenial 16.04 hostname missing
+# https://bugs.launchpad.net/ubuntu/+source/livecd-rootfs/+bug/1561250
+#
+if (! grep --quiet '127.0.1.1 ubuntu-xenial' /etc/hosts )
+then
+  (
+    echo
+    echo '# Bug fix - ubuntu-xenial 16.04 hostname missing'
+    echo '127.0.1.1 ubuntu-xenial'
+  ) | tee -a /etc/hosts
+fi
+
+
+# Start synchronized folder (/vagrant/)
 #
 if (! grep --quiet 'cd /vagrant/' /home/ubuntu/.bashrc )
 then
@@ -19,7 +32,7 @@ then
 fi
 
 
-# Update clock (skews when VM put to sleep)
+# Update clock (can skew when VM put to sleep)
 #
 if (! grep --quiet 'ca.pool.ntp.org' /home/ubuntu/.bashrc )
 then
