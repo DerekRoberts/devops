@@ -17,7 +17,13 @@ sudo apt-get install make git -y
 #
 sudo mkdir -p /hdc/
 sudo chown $( whoami ):$( whoami ) /hdc/
-git clone https://github.com/hdcbc/endpoint /hdc/endpoint
+if [ ! -d /hdc/endpoint ]
+then
+    git clone https://github.com/hdcbc/endpoint /hdc/endpoint
+else
+    cd /hdc/endpoint
+    git -C /hdc/endpoint pull
+fi
 
 
 # Start scripts in repo
