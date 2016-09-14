@@ -16,7 +16,7 @@ sudo apt-get install make git -y
 # Directories and Endpoint repo
 #
 sudo mkdir -p /hdc/
-sudo chown hdcadmin:hdcadmin /hdc/
+sudo chown $( whoami ):$( whoami ) /hdc/
 git clone https://github.com/hdcbc/endpoint /hdc/endpoint
 
 
