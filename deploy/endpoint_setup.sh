@@ -3,9 +3,9 @@
 # Endpoint deployment kick-off script
 
 
-# Halt on errors or uninitialized variables
+# Halt on errors or uninitialized variables and show steps
 #
-set -e -o nounset
+set -eux
 
 
 # Install make and git
