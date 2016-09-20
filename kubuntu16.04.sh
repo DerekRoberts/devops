@@ -46,6 +46,11 @@ sudo apt install -y \
   ( cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf - )
 
 
+# Global Shortcuts from file
+#
+wget -qO ~/.config/kglobalshortcutsrc "https://raw.githubusercontent.com/DerekRoberts/devops/master/kde/kglobalshortcutsrc"
+
+
 # Cleanup
 #
 sudo apt install -f
