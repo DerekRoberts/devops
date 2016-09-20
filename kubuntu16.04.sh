@@ -40,11 +40,12 @@ sudo apt install -y \
   vlc
 
 
-# Dropbox
+# Download and kick off Dropbox installer
 #
-[ -s ~/.dropbox-dist/dropbox-lnx.x86_64*/dropbox ]|| \
-  ( cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf - )
-~/.dropbox-dist/dropboxd &
+wget -O /tmp/dbdl.deb "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb"
+sudo dpkg -i /tmp/dbdl.deb
+rm /tmp/dbdl.deb
+/usr/bin/dropbox start -i
 
 
 
