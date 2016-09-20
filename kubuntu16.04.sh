@@ -6,7 +6,16 @@ set -eux
 # Insync GPG key and source file
 #
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ACCAF35C
-echo "deb http://apt.insynchq.com/ubuntu xenial non-free contrib" | sudo tee /etc/apt/sources.list.d/insync.list
+echo "deb http://apt.insynchq.com/ubuntu xenial non-free contrib" |\
+    sudo tee /etc/apt/sources.list.d/insync.list
+
+
+# Google Chrome key and source file
+#
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub |\
+    sudo apt-key add -
+echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" |\
+    sudo tee /etc/apt/sources.list.d/google-chrome.list
 
 
 # Atom.io PPA
@@ -24,6 +33,7 @@ sudo apt install -y \
   audacity \
   build-essential \
   comix \
+  google-chrome-stable \
   insync \
   linux-headers-generic \
   linux-headers-$( uname -r ) \
@@ -38,6 +48,6 @@ sudo apt install -y \
 
 # Cleanup
 #
-sudo apt-get install -f
-sudo apt-get autoremove -y
+sudo apt install -f
+sudo apt autoremove -y
 sudo update-grub
