@@ -43,9 +43,19 @@ sudo apt install -y \
   vlc
 
 
-# Automatic Security Updates
+# Automatic Security Upgrades
 #
 sudo dpkg-reconfigure --priority=low unattended-upgrades
+
+
+# +Automatic Recommended Upgrades
+#
+sudo sed -i -e '/${distro_id}.*updates/s/^\/\///' /etc/apt/apt.conf.d/50unattended-upgrades
+
+
+# +Automatic Weekly Autoclean
+#
+sudo sed -i '/APT::Periodic::AutocleanInterval/s/"0"/"7"/' /etc/apt/apt.conf.d/10periodic
 
 
 # Download and kick off Dropbox installer
