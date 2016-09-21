@@ -3,18 +3,6 @@
 set -eux
 
 
-# Automatic Security Updates
-#
-TARGET="/etc/apt/apt.conf.d/20auto-upgrades"
-if( ! grep --quiet 'APT::Periodic::Unattended-Upgrade "1";' ${TARGET} )
-then
-  ( \
-    echo 'APT::Periodic::Update-Package-Lists "1";'; \
-    echo 'APT::Periodic::Unattended-Upgrade "1";'; \
-  ) | sudo tee ${TARGET}
-fi
-
-
 # Insync GPG key and source file
 #
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ACCAF35C
@@ -51,7 +39,13 @@ sudo apt install -y \
   linux-headers-generic \
   linux-headers-$( uname -r ) \
   make \
+  unattended-upgrades \
   vlc
+
+
+# Automatic Security Updates
+#
+sudo dpkg-reconfigure --priority=low unattended-upgrades
 
 
 # Download and kick off Dropbox installer
