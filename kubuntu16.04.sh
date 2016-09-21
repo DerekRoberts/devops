@@ -33,10 +33,12 @@ sudo apt install -y \
   audacity \
   build-essential \
   comix \
+  git \
   google-chrome-stable \
   insync \
   linux-headers-generic \
   linux-headers-$( uname -r ) \
+  make \
   vlc
 
 
