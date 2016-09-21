@@ -73,3 +73,16 @@ wget -qO ~/.config/kglobalshortcutsrc "https://raw.githubusercontent.com/DerekRo
 sudo apt install -f
 sudo apt autoremove -y
 sudo update-grub
+
+
+# Bash
+#
+if( ! grep --quiet ~/Dropbox/Repos ~/.bashrc )
+then
+  ( \
+    echo ""; \
+    echo "# Directory Shortcuts"; \
+    echo "#"; \
+    echo "alias dev='cd ~/Dropbox/Repos'"; \
+  ) | tee -a ~/.bashrc
+fi
