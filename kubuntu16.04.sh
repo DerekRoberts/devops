@@ -3,6 +3,18 @@
 set -eux
 
 
+# Automatic Security Updates
+#
+TARGET="/etc/apt/apt.conf.d/20auto-upgrades"
+if( ! grep --quiet 'APT::Periodic::Unattended-Upgrade "1";' ${TARGET} )
+then
+  ( \
+    echo 'APT::Periodic::Update-Package-Lists "1";'; \
+    echo 'APT::Periodic::Unattended-Upgrade "1";'; \
+  ) | sudo tee ${TARGET}
+fi
+
+
 # Insync GPG key and source file
 #
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ACCAF35C
