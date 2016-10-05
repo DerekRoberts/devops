@@ -3,6 +3,16 @@
 set -eux
 
 
+# Prevent SSH timeouts
+#
+TARGET="/etc/ssh/ssh_config"
+CONFIG="ServerAliveInterval 60"
+if( ! grep --quiet ${CONFIG} ${TARGET} )
+then
+    echo "    ${CONFIG}" | sudo tee -a ${TARGET}
+fi
+
+
 # Insync GPG key and source file
 #
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ACCAF35C
@@ -81,7 +91,7 @@ sudo update-grub
 
 # Bash
 #
-if( ! grep --quiet ~/Dropbox/Repos ~/.bashrc )
+if( ! grep --quiet "~/Dropbox/Repos" ~/.bashrc )
 then
   ( \
     echo ""; \
