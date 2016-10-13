@@ -12,8 +12,7 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  # config.vm.box = "ubuntu/xenial64"
-  config.vm.box = "https://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-amd64-vagrant.box"
+  config.vm.box = "ubuntu/xenial64"
 
   # Ubuntu xenial64 bug, not synching /vagrant
   config.vm.synced_folder "", "/vagrant"
