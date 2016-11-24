@@ -5,7 +5,7 @@
 
 # Halt on errors or uninitialized variables and show steps
 #
-set -eux
+set -eu
 
 
 # Install make and git
@@ -29,4 +29,19 @@ fi
 # Start scripts in repo
 #
 cd /hdc/endpoint
-make hdc
+
+
+# Provide direction
+#
+echo
+echo
+echo "Repository cloned to /hdc/endpoint"
+echo
+echo "Type one of the following to setup"
+echo
+echo "make"
+echo "  - base install"
+echo
+echo "make hdc"
+echo "  - HDC managed install"
+echo
