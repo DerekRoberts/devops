@@ -8,7 +8,7 @@
 set -e -o nounset
 
 
-# Install Docker and Docker Compose
+# Install Docker
 #
 sudo apt-get update
 sudo apt-get install -y \
@@ -16,8 +16,23 @@ sudo apt-get install -y \
 	curl
 sudo modprobe aufs
 wget -qO- https://get.docker.com/ | sh
+
+
+# Get Newest Version of Docker compose
+#
+LIST=$( git ls-remote https://github.com/docker/compose | grep "refs/tags" | grep -oP "[0-9]+\.[0-9]+\.[0-9]+$" )
+VERSION=""
+while [ $( echo "${LIST}" | wc -l ) -gt 1 ]
+do
+    DIGIT=$( echo "${LIST}" | grep -oP "^[0-9]+" | sort -g | tail -n 1 )
+    VERSION="${VERSION}"."${DIGIT}"
+    LIST=$( echo "${LIST}" | sed -e "/^${DIGIT}/!d" -e "s/^${DIGIT}.//" )
+done
+VERSION=$( echo "${VERSION}" | sed "s/^\.//" )
+echo "${VERSION}"
+#
 sudo curl -o /usr/local/bin/docker-compose -L \
-		https://github.com/docker/compose/releases/download/1.8.0/docker-compose-`uname -s`-`uname -m`
+		https://github.com/docker/compose/releases/download/"${VERSION}"/docker-compose-`uname -s`-`uname -m`
 sudo chmod +x /usr/local/bin/docker-compose
 
 
