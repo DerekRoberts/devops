@@ -53,6 +53,8 @@ apt-get upgrade -y
 apt-get install -y --no-install-recommends \
   build-essential \
   curl \
+  linux-image-extra-$(uname -r) \
+  linux-image-extra-virtual \
   lynx \
   nmap \
   ntpdate \
