@@ -49,8 +49,17 @@ sudo apt install -y \
   linux-headers-generic \
   linux-headers-$( uname -r ) \
   make \
-  unattended-upgrades \
+  unattended-upgrades \ 
+  vagrant \
+  virtualbox \
   vlc
+
+
+# Set Git Push Default (suppress messages) and User Details
+#
+git config --global push.default simple
+git config --global user.email "Derek.Roberts@gmail.com"
+git config --global user.name "Derek Roberts"
 
 
 # Automatic Security Upgrades
