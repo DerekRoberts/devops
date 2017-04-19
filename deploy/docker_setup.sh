@@ -26,7 +26,7 @@ while [ $( echo "${LIST}" | wc -l ) -gt 1 ]
 do
     DIGIT=$( echo "${LIST}" | grep -oP "^[0-9]+" | sort -g | tail -n 1 )
     VERSION="${VERSION}"."${DIGIT}"
-    LIST=$( echo "${LIST}" | sed -e "/^${DIGIT}/!d" -e "s/^${DIGIT}.//" )
+    LIST=$( echo "${LIST}" | grep -P "^${DIGIT}" | sed 's/^[0-9]*\.*//' )
 done
 VERSION=$( echo "${VERSION}" | sed "s/^\.//" )
 echo "${VERSION}"
