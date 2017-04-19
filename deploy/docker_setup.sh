@@ -21,11 +21,10 @@ wget -qO- https://get.docker.com/ | sh
 # Get Newest Version of Docker compose
 #
 LIST=$( git ls-remote https://github.com/docker/compose | grep "refs/tags" | grep -oP "[0-9]+(\.[0-9]+)+$" )
-VERSION=""
 while [ $( echo "${LIST}" | wc -l ) -gt 1 ]
 do
     DIGIT=$( echo "${LIST}" | grep -oP "^[0-9]+" | sort -g | tail -n 1 )
-    VERSION="${VERSION}"."${DIGIT}"
+    VERSION="${VERSION:-}"."${DIGIT}"
     LIST=$( echo "${LIST}" | grep -P "^${DIGIT}" | sed 's/^[0-9]*\.*//' )
 done
 VERSION=$( echo "${VERSION}" | sed "s/^\.//" )
