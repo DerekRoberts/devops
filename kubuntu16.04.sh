@@ -43,13 +43,15 @@ sudo apt install -y \
   audacity \
   build-essential \
   comix \
+  fileschanged \
   git \
   google-chrome-stable \
   insync \
+  kcalc \
   linux-headers-generic \
   linux-headers-$( uname -r ) \
   make \
-  unattended-upgrades \ 
+  unattended-upgrades \
   vagrant \
   virtualbox \
   vlc
