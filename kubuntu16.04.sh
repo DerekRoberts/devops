@@ -81,10 +81,10 @@ sudo sed -i '/APT::Periodic::AutocleanInterval/s/"0"/"7"/' /etc/apt/apt.conf.d/1
 
 # Download and kick off Dropbox installer
 #
-wget -O /tmp/dbdl.deb "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb"
-sudo dpkg -i /tmp/dbdl.deb
-rm /tmp/dbdl.deb
-/usr/bin/dropbox start -i
+#wget -O /tmp/dbdl.deb "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb"
+#sudo dpkg -i /tmp/dbdl.deb
+#rm /tmp/dbdl.deb
+#/usr/bin/dropbox start -i
 
 
 
@@ -102,12 +102,12 @@ sudo update-grub
 
 # Bash
 #
-if( ! grep --quiet "~/Dropbox/Repos" ~/.bashrc )
+if( ! grep --quiet "~/Documents/Repos" ~/.bashrc )
 then
   ( \
     echo ""; \
     echo "# Directory Shortcuts"; \
     echo "#"; \
-    echo "alias dev='cd ~/Dropbox/Repos'"; \
+    echo "alias dev='cd ~/Documents/Repos'"; \
   ) | tee -a ~/.bashrc
 fi
