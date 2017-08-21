@@ -49,6 +49,7 @@ sudo apt install -y \
   guake \
   insync \
   kcalc \
+  kubuntu-driver-manager \
   linux-headers-generic \
   linux-headers-$( uname -r ) \
   make \
