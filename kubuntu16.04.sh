@@ -112,3 +112,13 @@ then
     echo "alias dev='cd ~/Documents/Repos'"; \
   ) | tee -a ~/.bashrc
 fi
+
+
+# Screen Edges - present windows for all corners
+#
+sed -i "s/^BorderActivateAll=.*/BorderActivateAll=1,3,5,7/" ~/.config/kwinrc
+
+
+# Reload kwin (for screen edges)
+#
+kwin --replace &
