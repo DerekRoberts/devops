@@ -55,7 +55,6 @@ sudo apt install -y \
   make \
   unattended-upgrades \
   vagrant \
-  virtualbox \
   vlc
 
 
