@@ -46,6 +46,7 @@ sudo apt install -y \
   fileschanged \
   git \
   google-chrome-stable \
+  guake \
   insync \
   kcalc \
   linux-headers-generic \
