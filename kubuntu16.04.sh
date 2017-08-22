@@ -114,9 +114,11 @@ then
 fi
 
 
-# Screen Edges - present windows for all corners
+# Screen Edges - present windows for all corners, shorten delay/cooldown
 #
 sed -i "s/^BorderActivateAll=.*/BorderActivateAll=1,3,5,7/" ~/.config/kwinrc
+sed -i "s/^ElectricBorderDelay=150/ElectricBorderDelay=50/" ~/.config/kwinrc
+sed -i "s/^ElectricBorderCooldown=350/ElectricBorderCooldown=150/" ~/.config/kwinrc
 
 
 # Reload kwin (for screen edges)
