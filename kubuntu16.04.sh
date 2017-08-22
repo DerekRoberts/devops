@@ -54,7 +54,6 @@ sudo apt install -y \
   linux-headers-$( uname -r ) \
   make \
   unattended-upgrades \
-  vagrant \
   vlc
 
 
