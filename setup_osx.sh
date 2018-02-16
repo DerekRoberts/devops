@@ -34,3 +34,11 @@ git config --global --get push.default ||
 git config --global --get user.email &&
 	git config --global --get user.name ||
 	git config --global --edit
+
+
+# Prevent ssh timeouts
+#
+TARGET="/etc/ssh/ssh_config"
+CONFIG="ServerAliveInterval 60"
+grep --quiet "${CONFIG}" "${TARGET}" ||
+	echo "	${CONFIG}" | sudo tee -a ${TARGET}
