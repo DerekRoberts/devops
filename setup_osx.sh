@@ -20,5 +20,8 @@ done
 
 # Configure git
 #
-git config --global push.default simple
-git config --global --edit
+git config --global --get push.default ||
+	git config --global push.default simple
+git config --global --get user.email &&
+	git config --global --get user.name ||
+	git config --global --edit
