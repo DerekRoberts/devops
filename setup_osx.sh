@@ -16,3 +16,9 @@ for p in $PACKAGES
 do
 	which $p || brew install $p
 done
+
+
+# Configure git
+#
+git config --global push.default simple
+git config --global --edit
