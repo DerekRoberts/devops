@@ -9,12 +9,21 @@ which brew || \
 	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 
-# Install packages
+# Brew install packages
 #
 PACKAGES="git ssh wget"
 for p in $PACKAGES
 do
 	which $p || brew install $p
+done
+
+
+# Brew cask install packages
+#
+PACKAGES="google-chrome minishift"
+for p in $PACKAGES
+do
+	which $p || brew cask install $p
 done
 
 
