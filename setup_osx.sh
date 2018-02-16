@@ -42,3 +42,20 @@ TARGET="/etc/ssh/ssh_config"
 CONFIG="ServerAliveInterval 60"
 grep --quiet "${CONFIG}" "${TARGET}" ||
 	echo "	${CONFIG}" | sudo tee -a ${TARGET}
+
+
+# Ensure bash shell script exists
+#
+BASHSS=~/.bash_profile
+touch "${BASHSS}"
+
+
+# Customize/shorten bash prompt
+#
+grep --quiet 'export PS1' "${BASHSS}" ||
+	(
+		echo ;
+		echo "# Bash prompt";
+		echo "#";
+		echo 'export PS1="\u@\h:\W$ "'
+	) >> "${BASHSS}"
