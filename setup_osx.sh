@@ -20,7 +20,7 @@ done
 
 # Brew cask install packages
 #
-PACKAGES="google-chrome minishift"
+PACKAGES="atom google-chrome minishift"
 for p in $PACKAGES
 do
 	which $p || brew cask install $p
