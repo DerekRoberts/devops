@@ -20,7 +20,7 @@ done
 
 # Brew cask install packages
 #
-PACKAGES="atom google-chrome minishift"
+PACKAGES="atom google-chrome iterm2 minishift skype-for-business"
 for p in $PACKAGES
 do
 	which $p || brew cask install $p
