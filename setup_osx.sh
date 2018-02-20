@@ -11,10 +11,10 @@ which brew || \
 
 # Brew install packages
 #
-PACKAGES="git ssh wget"
+PACKAGES="git wget"
 for p in $PACKAGES
 do
-	which $p || brew install $p
+	brew list $p || brew install $p
 done
 
 
@@ -23,7 +23,7 @@ done
 PACKAGES="atom google-chrome iterm2 minishift skype-for-business"
 for p in $PACKAGES
 do
-	which $p || brew cask install $p
+	brew cask list $p || brew cask install $p
 done
 
 
