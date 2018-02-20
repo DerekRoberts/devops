@@ -63,7 +63,7 @@ grep --quiet 'export PS1' "${BASHSS}" ||
 
 # Aliases
 #
-grep --quiet 'alias l=' "${BASHSS}" ||
+grep --quiet 'alias dev=' "${BASHSS}" ||
         (
                 echo ;
                 echo "# Aliases";
