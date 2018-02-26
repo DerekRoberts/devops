@@ -45,6 +45,12 @@ done
 	git config --global --edit
 
 
+# Set minishift hypervisor to virtualbox
+#
+[ "$( minishift config get vm-driver )" == "virtualbox" ] || \
+	minishift config set vm-driver virtualbox
+
+
 # Prevent ssh timeouts
 #
 TARGET="/etc/ssh/ssh_config"
