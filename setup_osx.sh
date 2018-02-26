@@ -36,13 +36,13 @@ done
 
 # Configure git
 #
-git config --global --get push.default || \
+[ "$( git config --global --get push.default )" == "simple" ] || \
 	git config --global push.default simple
-git config --global --get user.email && \
-	git config --global --get user.name || \
-	git config --global --edit
-git config --global --get core.autocrlf || \
+[ "$( git config --global --get core.autocrlf)" == "input" ] || \
 	git config --global core.autocrlf input
+[ "$( git config --global --get user.email )" ] && \
+	[ "( git config --global --get user.name)" ] || \
+	git config --global --edit
 
 
 # Prevent ssh timeouts
