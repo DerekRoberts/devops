@@ -6,7 +6,8 @@ set -eux
 # Install Homebrew
 #
 which brew || \
-	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	/usr/bin/ruby -e "$( curl -fsSL \
+	https://raw.githubusercontent.com/Homebrew/install/master/install )"
 
 
 # Brew install packages
@@ -29,18 +30,20 @@ done
 
 # Configure git
 #
-git config --global --get push.default ||
+git config --global --get push.default || \
 	git config --global push.default simple
-git config --global --get user.email &&
-	git config --global --get user.name ||
+git config --global --get user.email && \
+	git config --global --get user.name || \
 	git config --global --edit
+git config --global --get core.autocrlf || \
+	git config --global core.autocrlf input
 
 
 # Prevent ssh timeouts
 #
 TARGET="/etc/ssh/ssh_config"
 CONFIG="ServerAliveInterval 60"
-grep --quiet "${CONFIG}" "${TARGET}" ||
+grep --quiet "${CONFIG}" "${TARGET}" || \
 	echo "	${CONFIG}" | sudo tee -a ${TARGET}
 
 
@@ -52,7 +55,7 @@ touch "${BASHSS}"
 
 # Customize/shorten bash prompt
 #
-grep --quiet 'export PS1' "${BASHSS}" ||
+grep --quiet 'export PS1' "${BASHSS}" || \
 	(
 		echo ;
 		echo "# Bash prompt";
@@ -63,7 +66,7 @@ grep --quiet 'export PS1' "${BASHSS}" ||
 
 # Aliases
 #
-grep --quiet 'alias dev=' "${BASHSS}" ||
+grep --quiet 'alias dev=' "${BASHSS}" || \
         (
                 echo ;
                 echo "# Aliases";
