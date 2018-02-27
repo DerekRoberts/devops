@@ -179,3 +179,15 @@ then
 		) >> "${BASHSS}"
 	fi
 fi
+
+
+# Recommend sourcing ~/.bash_profile if the file has changed
+#
+if [ "${BASHSS_CHECKSUM}" != $( md5 -q "${BASHSS}" ) ]
+then
+	echo
+	echo "Warning: ~/.bash_profile has changed!  To source it type:"
+	echo
+	echo "source ~/.bash_profile "
+fi
+echo
