@@ -131,3 +131,48 @@ done
 #
 [ -f /usr/local/bin/oc ]||
 	ln -s ~/.minishift/cache/oc/v3.7.14/darwin/oc /usr/local/bin/oc
+
+
+# Set Red Hat Developer username and password (to dl container images)
+#
+if([ -z "${MINISHIFT_USERNAME+x}" ]||[ -z "${MINISHIFT_PASSWORD+x}" ])
+then
+	echo
+	read -p "Red Hat Username: " MINISHIFT_USERNAME
+	while [ true ]
+	do
+		echo
+		read -s -p "Red Hat Password: " MINISHIFT_PASSWORD
+		echo
+		read -s -p "Confirm Password: " CONFIRM_PW
+		echo
+		[ "${MINISHIFT_PASSWORD}" != "${CONFIRM_PW}" ]|| \
+			break
+		echo "Passwords do not match.  Please try again."
+	done
+fi
+
+
+# Minishift variables
+#
+if( ! grep --quiet 'export MINISHIFT_USERNAME=' "${BASHSS}" || \
+	! grep --quiet "export MINISHIFT_PASSWORD=" "${BASHSS}" )
+then
+	echo
+	echo "Add the following to ${BASHSS}?"
+	echo "Red Hat Username: ${MINISHIFT_USERNAME}"
+	echo "Red Hat Password: <hidden>"
+	echo
+	read -n 1 -p "(y|n):" yORn
+	echo
+        if([ "${yORn}" == "y" ]||[ "${yORn}" == "Y" ])
+	then
+		(
+			echo ;
+			echo "# OpenShift variables";
+			echo "#";
+			echo "export MINISHIFT_USERNAME=${MINISHIFT_USERNAME}";
+			echo "export MINISHIFT_PASSWORD=${MINISHIFT_PASSWORD}";
+		) >> "${BASHSS}"
+	fi
+fi
