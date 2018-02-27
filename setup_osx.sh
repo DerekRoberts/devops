@@ -115,6 +115,12 @@ do
 done
 
 
+# Install minishift CDK components
+#
+[ -d ~/.minishift ]|| \
+	minishift setup-cdk
+
+
 # Set minishift hypervisor to virtualbox
 #
 [ "$( minishift config get vm-driver )" == "virtualbox" ] || \
