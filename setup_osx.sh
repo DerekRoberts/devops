@@ -27,7 +27,7 @@ done
 
 # Brew cask install packages
 #
-PACKAGES="atom google-chrome iterm2 minishift skype-for-business vagrant virtualbox"
+PACKAGES="atom google-chrome iterm2 skype-for-business vagrant virtualbox"
 for p in $PACKAGES
 do
 	brew cask list $p || brew cask install $p
@@ -43,12 +43,6 @@ done
 [ "$( git config --global --get user.email )" ] && \
 	[ "( git config --global --get user.name)" ] || \
 	git config --global --edit
-
-
-# Set minishift hypervisor to virtualbox
-#
-[ "$( minishift config get vm-driver )" == "virtualbox" ] || \
-	minishift config set vm-driver virtualbox
 
 
 # Prevent ssh timeouts
@@ -86,3 +80,30 @@ grep --quiet 'alias dev=' "${BASHSS}" || \
                 echo "alias dev='cd /Users/derobert/Google\ Drive/Repos'";
                 echo "alias ll='ls -l'"
         ) >> "${BASHSS}"
+
+
+# Install minishift
+#
+( which minishift )||( \
+	tput bel
+	echo
+	echo "Please download Red Hat's Minishift!  A window will open shortly."
+	echo
+	echo "Place cdk-* in ~/Downloads and grant this script access to move it."
+	echo
+	sleep 5
+	open https://developers.redhat.com/download-manager/file/cdk-3.3.0-1-minishift-darwin-amd64
+)
+while ( ! which minishift );
+do
+        echo
+	find ~/Downloads -maxdepth 1 -name 'cdk-*' -exec mv '{}' /usr/local/bin/minishift \;
+	sudo chmod +x /usr/local/bin/minishift
+        sleep 60
+done
+
+
+# Set minishift hypervisor to virtualbox
+#
+[ "$( minishift config get vm-driver )" == "virtualbox" ] || \
+	minishift config set vm-driver virtualbox
