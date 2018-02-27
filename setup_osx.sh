@@ -125,3 +125,9 @@ done
 #
 [ "$( minishift config get vm-driver )" == "virtualbox" ] || \
 	minishift config set vm-driver virtualbox
+
+
+# Put alias to oc in path
+#
+[ -f /usr/local/bin/oc ]||
+	ln -s ~/.minishift/cache/oc/v3.7.14/darwin/oc /usr/local/bin/oc
