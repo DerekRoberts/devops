@@ -9,6 +9,14 @@ set -eu
 	set -x
 
 
+# Ensure bash shell script exists and store its checksum
+#
+BASHSS=~/.bash_profile
+touch "${BASHSS}"
+cat "${BASHSS}"
+BASHSS_CHECKSUM=$( md5 -q "${BASHSS}" )
+
+
 # Install Oracle JDK
 #
 which java ||( \
@@ -64,11 +72,6 @@ CONFIG="ServerAliveInterval 60"
 grep --quiet "${CONFIG}" "${TARGET}" || \
 	echo "	${CONFIG}" | sudo tee -a ${TARGET}
 
-
-# Ensure bash shell script exists
-#
-BASHSS=~/.bash_profile
-touch "${BASHSS}"
 
 
 # Customize/shorten bash prompt
