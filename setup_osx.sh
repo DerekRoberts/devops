@@ -9,6 +9,18 @@ set -eu
 	set -x
 
 
+# Install Oracle JDK
+#
+which java ||( \
+	tput bel
+	echo
+	echo "Please install Oracle's JDK!  A window will open shortly."
+	echo
+	sleep 5
+	open http://www.oracle.com/technetwork/java/javase/downloads/index.html
+)
+
+
 # Install Homebrew
 #
 which brew || \
