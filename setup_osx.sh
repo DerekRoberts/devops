@@ -73,30 +73,6 @@ grep --quiet "${CONFIG}" "${TARGET}" || \
 	echo "	${CONFIG}" | sudo tee -a ${TARGET}
 
 
-
-# Customize/shorten bash prompt
-#
-grep --quiet 'export PS1' "${BASHSS}" || \
-	(
-		echo ;
-		echo "# Bash prompt";
-		echo "#";
-		echo 'export PS1="\u@\h:\W$ "'
-	) >> "${BASHSS}"
-
-
-# Aliases
-#
-grep --quiet 'alias dev=' "${BASHSS}" || \
-        (
-                echo ;
-                echo "# Aliases";
-                echo "#";
-                echo "alias dev='cd /Users/derobert/Google\ Drive/Repos'";
-                echo "alias ll='ls -l'"
-        ) >> "${BASHSS}"
-
-
 # Install minishift
 #
 ( which minishift )||( \
@@ -179,6 +155,29 @@ then
 		) >> "${BASHSS}"
 	fi
 fi
+
+
+# Customize/shorten bash prompt
+#
+grep --quiet 'export PS1' "${BASHSS}" || \
+	(
+		echo ;
+		echo "# Bash prompt";
+		echo "#";
+		echo 'export PS1="\u@\h:\W$ "'
+	) >> "${BASHSS}"
+
+
+# Aliases
+#
+grep --quiet 'alias dev=' "${BASHSS}" || \
+        (
+                echo ;
+                echo "# Aliases";
+                echo "#";
+                echo "alias dev='cd /Users/derobert/Google\ Drive/Repos'";
+                echo "alias ll='ls -l'"
+        ) >> "${BASHSS}"
 
 
 # Recommend sourcing ~/.bash_profile if the file has changed
