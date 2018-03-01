@@ -47,7 +47,7 @@ done
 
 # Brew cask install packages
 #
-PACKAGES="atom google-chrome iterm2 skype-for-business vagrant virtualbox"
+PACKAGES="atom delayedlauncher google-chrome iterm2 skype-for-business vagrant virtualbox"
 for p in $PACKAGES
 do
 	brew cask list $p || brew cask install $p
