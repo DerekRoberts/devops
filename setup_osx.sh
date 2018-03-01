@@ -75,23 +75,27 @@ grep --quiet "${CONFIG}" "${TARGET}" || \
 
 # Install minishift
 #
-( which minishift )||( \
-	tput bel
-	echo
-	echo "Please download Red Hat's Minishift!  A window will open shortly."
-	echo
-	echo "Place cdk-* in ~/Downloads and grant this script access to move it."
-	echo
-	sleep 5
-	open https://developers.redhat.com/download-manager/file/cdk-3.3.0-1-minishift-darwin-amd64
-)
-while ( ! which minishift );
-do
-        echo
-	find ~/Downloads -maxdepth 1 -name 'cdk-*' -exec mv '{}' /usr/local/bin/minishift \;
-	sudo chmod +x /usr/local/bin/minishift
-        sleep 60
-done
+DL_FIND="$( find ~/Downloads -maxdepth 1 -name 'cdk-*-minishift-darwin-amd64' )"
+if( ! which minishift )
+then
+	if( [ -z "${DL_FIND}" ] );
+	then
+		tput bel
+		echo
+		echo "Please download Red Hat's Minishift!  A window will open shortly."
+		echo
+		echo "Place cdk-* in ~/Downloads and this script will move it."
+		echo
+		sleep 5
+		open https://developers.redhat.com/download-manager/file/cdk-3.3.0-1-minishift-darwin-amd64
+	fi
+	while ( ! which minishift );
+	do
+	        echo
+		find ~/Downloads -maxdepth 1 -name 'cdk-*-minishift-darwin-amd64' -exec chmod +x '{}' \; -exec mv '{}' /usr/local/bin/minishift \;
+	        sleep 10
+	done
+fi
 
 
 # Install minishift CDK components
