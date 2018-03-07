@@ -13,7 +13,6 @@ set -eu
 #
 BASHSS=~/.bash_profile
 touch "${BASHSS}"
-cat "${BASHSS}"
 BASHSS_CHECKSUM=$( md5 -q "${BASHSS}" )
 
 
