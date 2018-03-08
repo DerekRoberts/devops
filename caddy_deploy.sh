@@ -29,7 +29,6 @@ then
 fi
 
 
-
 # Vars, incl. image name and base
 #
 IMG_NAME=caddy-docker-s2i
