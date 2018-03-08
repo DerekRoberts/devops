@@ -11,8 +11,9 @@ set -eu
 
 # Verify login
 #
-if( ! oc login )
+if( ! oc project )
 then
+	oc login || true
         echo "Paste this token into the command line"
         read -n 1 -p "Follow link? (y|n):" yORn
         echo
