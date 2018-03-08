@@ -3,6 +3,27 @@
 set -eux
 
 
+# Verify login
+#
+if( ! oc login )
+then
+        echo "Paste this token into the command line"
+        read -n 1 -p "Follow link? (y|n):" yORn
+        echo
+
+        # Open link if selected
+        [ "${yORn}" != "y" ]&&[ "${yORn}" != "Y" ]|| \
+                open https://console.pathfinder.gov.bc.ca:8443/oauth/token/request
+
+        # Inform and exit
+        echo
+        echo "Exiting: not logged in"
+        echo
+        exit
+fi
+
+
+
 # Vars, incl. image name and base
 #
 IMG_NAME=caddy-docker-s2i
