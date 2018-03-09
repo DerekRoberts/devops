@@ -3,10 +3,16 @@
 set -eu
 
 
+# Default settings, change with environment variables
+#
+IMG_NAME="${IMG_NAME:-caddy-docker-s2i}"
+APP_NAME="${APP_NAME:-caddy-static-page}"
+
+
 # Verbose option
 #
-[ ! -z "${VERBOSE+x}" ]&&[ "${VERBOSE}" == true ]&& \
-	set -x
+VERBOSE="${VERBOSE:-false}"
+[ "${VERBOSE}" != "true" ]|| set -x
 
 
 # Verify login
@@ -32,12 +38,11 @@ fi
 
 # Create Caddy S2I image
 #
-IMG_NAME=caddy-docker-s2i
-echo
 if( !( oc get bc; oc get is )| grep -o "${IMG_NAME}" )
 then
 	oc new-build https://github.com/BCDevOps/s2i-caddy.git --name="${IMG_NAME}"
 else
+	echo
 	echo "Buildconfig or imagestream already exist, skipping creation"
 	echo
 	echo "View with:"
@@ -49,6 +54,5 @@ fi
 
 # Create new app from S2I image and static repo
 #
-APP_NAME=caddy-static-page
 oc new-app caddy-docker-s2i~https://github.com/DerekRoberts/static-dump \
 	--name="${APP_NAME}"
