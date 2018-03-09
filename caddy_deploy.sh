@@ -30,25 +30,20 @@ then
 fi
 
 
-# Vars, incl. image name and base
-#
-IMG_NAME=caddy-docker-s2i
-GET_BC=$( oc get bc "${IMG_NAME}" | grep -o "${IMG_NAME}" )
-GET_IS=$( oc get is "${IMG_NAME}" | grep -o "${IMG_NAME}" )
-
-
 # Create Caddy S2I image
 #
+IMG_NAME=caddy-docker-s2i
 echo
-if [ ! -z "${GET_BC}" ] && [ ! -z "${GET_IS}" ]
+if( !( oc get bc; oc get is )| grep -o "${IMG_NAME}" )
 then
+	oc new-build https://github.com/BCDevOps/s2i-caddy.git --name="${IMG_NAME}"
+else
 	echo "Buildconfig or imagestream already exist, skipping creation"
 	echo
 	echo "View with:"
 	echo " 'oc get bc' and"
 	echo " 'oc get is'"
-else
-	oc new-build https://github.com/BCDevOps/s2i-caddy.git --name="${IMG_NAME}"
+	echo
 fi
 
 
