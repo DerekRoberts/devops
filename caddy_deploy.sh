@@ -78,7 +78,8 @@ fi
 #
 if( !( oc get bc; oc get is; oc get bc; oc get svc )| grep -o "${APP_NAME}" )
 then
-	oc new-app "${IMG_NAME}"~"${MSG_REPO}" --name="${APP_NAME}"
+	# note: var quotes causing trouble
+	oc new-app ${IMG_NAME}~${MSG_REPO} --name=${APP_NAME}
 else
 	echo
 	echo "Buildconfig, imagestream, deploymentconfig or service already exist."
