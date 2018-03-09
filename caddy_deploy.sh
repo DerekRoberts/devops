@@ -9,13 +9,13 @@ IMG_NAME="${IMG_NAME:-caddy-docker-s2i}"
 APP_NAME="${APP_NAME:-caddy-static-page}"
 MSG_REPO="${MSG_REPO:-https://github.com/DerekRoberts/static-dump}"
 
+
 # Verbose option
 #
 VERBOSE="${VERBOSE:-false}"
 [ "${VERBOSE}" != "true" ]|| set -x
 
 
-#
 if [ "${#}" -ne 0 ]
 then
 	echo
@@ -67,8 +67,7 @@ fi
 
 # Create new app from S2I image and static repo
 #
-if( !( oc get bc; oc get is; oc get bc; oc get services )\
-	| grep -o "${APP_NAME}" )
+if( !( oc get bc; oc get is; oc get bc; oc get svc )| grep -o "${APP_NAME}" )
 then
 	oc new-app "${IMG_NAME}"~"${MSG_REPO}" --name="${APP_NAME}"
 else
@@ -79,6 +78,6 @@ else
 	echo " 'oc get bc'"
 	echo " 'oc get is'"
 	echo " 'oc get dc' and"
-	echo " 'oc get services'"
+	echo " 'oc get svc'"
 	echo
 fi
