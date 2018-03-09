@@ -15,6 +15,19 @@ VERBOSE="${VERBOSE:-false}"
 [ "${VERBOSE}" != "true" ]|| set -x
 
 
+#
+if [ "${#}" -ne 0 ]
+then
+	echo
+	echo "Deploy Caddy to allow maintenance or downtime messages."
+	echo
+	echo "Set variables to non-defaults at runtime.  E.g.:"
+	echo " 'VERBOSE=true ./caddy_deploy.sh'"
+	echo
+	exit
+fi
+
+
 # Verify login
 #
 if( ! oc project )
