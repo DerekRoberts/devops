@@ -56,7 +56,7 @@ then
 	oc new-build https://github.com/BCDevOps/s2i-caddy.git --name="${IMG_NAME}"
 else
 	echo
-	echo "Buildconfig or imagestream already exist, skipping creation"
+	echo "Buildconfig or imagestream already exist"
 	echo
 	echo "View with:"
 	echo " 'oc get bc' and"
@@ -67,4 +67,18 @@ fi
 
 # Create new app from S2I image and static repo
 #
-oc new-app "${IMG_NAME}"~"${MSG_REPO}" --name="${APP_NAME}"
+if( !( oc get bc; oc get is; oc get bc; oc get services )\
+	| grep -o "${APP_NAME}" )
+then
+	oc new-app "${IMG_NAME}"~"${MSG_REPO}" --name="${APP_NAME}"
+else
+	echo
+	echo "Buildconfig, imagestream, deploymentconfig or service already exist."
+	echo
+	echo "View with:"
+	echo " 'oc get bc'"
+	echo " 'oc get is'"
+	echo " 'oc get dc' and"
+	echo " 'oc get services'"
+	echo
+fi
