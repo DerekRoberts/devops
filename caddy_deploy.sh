@@ -7,7 +7,7 @@ set -eu
 #
 IMG_NAME="${IMG_NAME:-caddy-docker-s2i}"
 APP_NAME="${APP_NAME:-caddy-static-page}"
-
+MSG_REPO="${MSG_REPO:-https://github.com/DerekRoberts/static-dump}"
 
 # Verbose option
 #
@@ -67,5 +67,4 @@ fi
 
 # Create new app from S2I image and static repo
 #
-oc new-app caddy-docker-s2i~https://github.com/DerekRoberts/static-dump \
-	--name="${APP_NAME}"
+oc new-app "${IMG_NAME}"~"${MSG_REPO}" --name="${APP_NAME}"
