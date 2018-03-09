@@ -81,3 +81,18 @@ else
 	echo " 'oc get svc'"
 	echo
 fi
+
+
+# Expose application (route)
+#
+if( !( oc get routes )| grep -o "${APP_NAME}" )
+then
+	oc expose svc/caddy-static-page
+else
+	echo
+	echo "Route already exists."
+	echo
+	echo "View with:"
+	echo " 'oc get routes'"
+	echo
+fi
