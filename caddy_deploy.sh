@@ -3,11 +3,18 @@
 set -eu
 
 
-# Default settings, change with environment variables
+# Build settings
 #
 IMG_NAME="${IMG_NAME:-caddy-docker-s2i}"
 APP_NAME="${APP_NAME:-caddy-static-page}"
+#
+IMG_REPO="${IMG_REPO:-https://github.com/BCDevOps/s2i-caddy.git}"
 MSG_REPO="${MSG_REPO:-https://github.com/DerekRoberts/static-dump}"
+
+
+# Server settings
+#
+OC_SERVER="${OC_SERVER:-https://console.pathfinder.gov.bc.ca:8443}"
 
 
 # Verbose option
@@ -16,6 +23,8 @@ VERBOSE="${VERBOSE:-false}"
 [ "${VERBOSE}" != "true" ]|| set -x
 
 
+# Show message if passed any params
+#
 if [ "${#}" -ne 0 ]
 then
 	echo
@@ -39,7 +48,7 @@ then
 
         # Open link if selected
         [ "${yORn}" != "y" ]&&[ "${yORn}" != "Y" ]|| \
-                open https://console.pathfinder.gov.bc.ca:8443/oauth/token/request
+                open "${OC_SERVER}"/oauth/token/request
 
         # Inform and exit
         echo
@@ -53,7 +62,7 @@ fi
 #
 if( !( oc get bc; oc get is )| grep -o "${IMG_NAME}" )
 then
-	oc new-build https://github.com/BCDevOps/s2i-caddy.git --name="${IMG_NAME}"
+	oc new-build "${IMG_REPO}" --name="${IMG_NAME}"
 else
 	echo
 	echo "Buildconfig or imagestream already exist"
@@ -87,7 +96,7 @@ fi
 #
 if( !( oc get routes )| grep -o "${APP_NAME}" )
 then
-	oc expose svc/caddy-static-page
+	oc expose svc/${APP_NAME}
 else
 	echo
 	echo "Route already exists."
