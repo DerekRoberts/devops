@@ -50,3 +50,10 @@ then
 else
 	oc new-build https://github.com/BCDevOps/s2i-caddy.git --name="${IMG_NAME}"
 fi
+
+
+# Create new app from S2I image and static repo
+#
+APP_NAME=caddy-static-page
+oc new-app caddy-docker-s2i~https://github.com/DerekRoberts/static-dump \
+	--name="${APP_NAME}"
