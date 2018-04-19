@@ -54,8 +54,6 @@ PACKAGES=(
 	"google-chrome"
 	"iterm2"
 	"skype-for-business"
-	"vagrant"
-	"virtualbox"
 )
 for p in ${PACKAGES[@]}
 do
