@@ -1,19 +1,28 @@
 #!/bin/bash
+
+
+# Halt conditions, verbosity and field separator
 #
-set -eu
+set -euo pipefail
+IFS=$'\n\t'
 
 
 # Verbose option
 #
 [ ! -z "${VERBOSE+x}" ]&&[ "${VERBOSE}" == true ]&& \
-	set -x
-
+    set -x
 
 # Ensure bash shell script exists and store its checksum
 #
 BASHSS=~/.bash_profile
 touch "${BASHSS}"
 BASHSS_CHECKSUM=$( md5 -q "${BASHSS}" )
+
+
+# Verbose option
+#
+[ ! -z "${VERBOSE+x}" ]&&[ "${VERBOSE}" == true ]&& \
+	set -x
 
 
 # Install Oracle JDK
@@ -37,8 +46,11 @@ which brew || \
 
 # Brew install packages
 #
-PACKAGES="git wget"
-for p in $PACKAGES
+PACKAGES=(
+	"git"
+	"wget"
+)
+for p in ${PACKAGES[@]}
 do
 	brew list $p || brew install $p
 done
@@ -46,8 +58,16 @@ done
 
 # Brew cask install packages
 #
-PACKAGES="atom delayedlauncher google-chrome iterm2 skype-for-business vagrant virtualbox"
-for p in $PACKAGES
+PACKAGES=(
+	"atom"
+	"delayedlauncher"
+	"google-chrome"
+	"iterm2"
+	"skype-for-business"
+	"vagrant"
+	"virtualbox"
+)
+for p in ${PACKAGES[@]}
 do
 	brew cask list $p || brew cask install $p
 done
