@@ -4,25 +4,15 @@
 # Halt conditions, verbosity and field separator
 #
 set -euo pipefail
+[ "${VERBOSE:-false}" != true ]|| set -x
 IFS=$'\n\t'
 
-
-# Verbose option
-#
-[ ! -z "${VERBOSE+x}" ]&&[ "${VERBOSE}" == true ]&& \
-    set -x
 
 # Ensure bash shell script exists and store its checksum
 #
 BASHSS=~/.bash_profile
 touch "${BASHSS}"
 BASHSS_CHECKSUM=$( md5 -q "${BASHSS}" )
-
-
-# Verbose option
-#
-[ ! -z "${VERBOSE+x}" ]&&[ "${VERBOSE}" == true ]&& \
-	set -x
 
 
 # Install Oracle JDK
