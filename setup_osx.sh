@@ -186,7 +186,6 @@ grep --quiet 'alias dev=' "${BASHSS}" || \
                 echo ;
                 echo "# Aliases";
                 echo "#";
-                echo "alias dev='cd /Users/derobert/Google\ Drive/Repos'";
                 echo "alias ll='ls -l'"
         ) >> "${BASHSS}"
 
