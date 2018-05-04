@@ -61,17 +61,6 @@ do
 done
 
 
-# Configure git
-#
-[ "$( git config --global --get push.default )" == "simple" ] || \
-	git config --global push.default simple
-[ "$( git config --global --get core.autocrlf)" == "input" ] || \
-	git config --global core.autocrlf input
-[ "$( git config --global --get user.email )" ] && \
-	[ "( git config --global --get user.name)" ] || \
-	git config --global --edit
-
-
 # Prevent ssh timeouts
 #
 TARGET="/etc/ssh/ssh_config"
@@ -190,11 +179,28 @@ grep --quiet 'alias dev=' "${BASHSS}" || \
         ) >> "${BASHSS}"
 
 
+# Configure git
+#
+[ "$( git config --global --get push.default )" == "simple" ] || \
+	git config --global push.default simple
+[ "$( git config --global --get core.autocrlf)" == "input" ] || \
+	git config --global core.autocrlf input
+if [ ! "$( git config --global --get user.email )" ] || \
+	[ ! "( git config --global --get user.name)" ]
+then
+	echo \
+	echo "Git not fully configured!  Set username and password:"
+	echo
+	echo "git config --global user.email 'YOUR_EMAIL_ADDRESS'"
+	echo "git config --global user.name 'FIRST_NAME LAST_NAME'"
+fi
+echo
+
+
 # Recommend sourcing ~/.bash_profile if the file has changed
 #
 if [ "${BASHSS_CHECKSUM}" != $( md5 -q "${BASHSS}" ) ]
 then
-	echo
 	echo "Warning: ~/.bash_profile has changed!  To source it type:"
 	echo
 	echo "source ~/.bash_profile "
