@@ -185,6 +185,8 @@ grep --quiet 'alias dev=' "${BASHSS}" || \
 	git config --global push.default simple
 [ "$( git config --global --get core.autocrlf)" == "input" ] || \
 	git config --global core.autocrlf input
+[ "$( git config --global --get core.editor)" == "nano" ] || \
+	git config --global core.editor "nano"
 if [ ! "$( git config --global --get user.email )" ] || \
 	[ ! "( git config --global --get user.name)" ]
 then
